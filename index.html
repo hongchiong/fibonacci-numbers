@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fibonacci</title>
+</head>
+<body>
+    <canvas></canvas>
+    <script>
+
+        let fibonacci = num => {
+            let first = 0
+            let second = 1
+            let result =0;
+            while (num >= 0) {
+                result = first + second;
+                // console.log(result);
+                //update new values
+                first = second;
+                second = result;
+                num--;
+            }
+            return result;
+        };
+        let cx = document.querySelector("canvas").getContext("2d");
+        console.log(window.innerWidth);
+        cx.canvas.width = window.innerWidth;
+        cx.canvas.height = window.innerHeight;
+        cx.beginPath();
+        cx.moveTo(window.innerWidth/2, window.innerHeight/2);
+        cx.fillStyle = "#ff2626";
+        let altx = 1;
+        let alty = -1;
+        // control=(60,10) goal=(90,90)
+        for (var i = 0; i < 30; i++) {
+            //cx.quadraticCurveTo(, 10, 90+fibonacci(i), 90+fibonacci(i));
+            cx.arc((window.innerWidth/2)+(fibonacci(i)*2*altx), (window.innerHeight/2)+(fibonacci(i)*2*alty), 3, 0, Math.PI * 2, true);
+            if (i%2==0) {
+                alty = alty * -1;
+            }
+            if (i%3==0) {
+                altx = altx * -1;
+            }
+            // altx = altx * -1;
+            // cx.fill();
+            // cx.lineTo(60, 10);
+            // cx.closePath();
+            cx.stroke();
+        }
+
+            // cx.lineTo(60, 10);
+            cx.closePath();
+        // cx.quadraticCurveTo(60, 10, 90, 90);
+
+    </script>
+</body>
+</html>
